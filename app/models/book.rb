@@ -1,5 +1,5 @@
 class Book < ApplicationRecord
-    has_many :lists
+    has_and_belongs_to_many :lists
     has_many :users, through: :lists
     validates :title, presence: true
     validates :self_link, presence: true
