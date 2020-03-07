@@ -1,6 +1,8 @@
 class User < ApplicationRecord
+    has_many :books
     has_many :lists
-    has_many :books, through: :lists
+    has_many :list_additions, through: :lists, source: :book
+
 
     has_secure_password
     validates :username, uniqueness: true

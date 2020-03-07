@@ -10,15 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_07_194137) do
-
-  create_table "booklists", force: :cascade do |t|
-    t.integer "book_id"
-    t.integer "list_id"
-  end
+ActiveRecord::Schema.define(version: 2020_03_07_144941) do
 
   create_table "books", force: :cascade do |t|
-    t.integer "list_id"
+    t.integer "user_id"
     t.string "self_link"
     t.string "title"
     t.string "author"
@@ -37,6 +32,7 @@ ActiveRecord::Schema.define(version: 2020_03_07_194137) do
 
   create_table "lists", force: :cascade do |t|
     t.integer "user_id"
+    t.integer "book_id"
     t.string "name"
     t.string "description"
     t.datetime "created_at", null: false
