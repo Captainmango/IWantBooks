@@ -1,4 +1,4 @@
 class List < ApplicationRecord
-    has_many :books
-    has_many :comments, through: :books
+    belongs_to :book
+    belongs_to :user
 end

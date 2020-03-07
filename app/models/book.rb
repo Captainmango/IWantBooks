@@ -1,6 +1,6 @@
 class Book < ApplicationRecord
-    has_many :lists
-    has_many :comments, through: :lists
+    has_many :users
+    has_many :users, through: :lists
 
 
     def self.search_books(query_string, author="", title="") 
