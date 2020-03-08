@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
@@ -16,11 +15,12 @@ Devise.setup do |config|
 
 
   # Add the credentials from your Google application to your secrets
-  client_id = Rails.application.secrets[:google_client_id]
-  client_secret = Rails.application.secrets[:google_secret]
+   client_id = Rails.application.secrets[:google_client_id]
+   client_secret = Rails.application.secrets[:google_secret]
   # Configure Google omniauth with proper scope
-  config.omniauth :google_oauth2, ENV["CLIENT_ID"], ENV["CLIENT_SECRET"], {
-    scope: "https://www.googleapis.com/auth/books"}
+   config.omniauth :google_oauth2, ENV["CLIENT_ID"], ENV["CLIENT_SECRET"], 
+     scope: "https://www.googleapis.com/auth/books, email, profile", :info_fields => 'email',
+     :provider_ignores_state => true
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
