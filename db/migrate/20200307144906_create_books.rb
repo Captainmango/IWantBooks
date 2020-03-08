@@ -6,7 +6,7 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       t.string :title
       t.string :author, :default => "Author Unknown"
       t.string :preview_link
-      t.string :thumbnail
+      t.belongs_to :user
       
 
       t.timestamps
