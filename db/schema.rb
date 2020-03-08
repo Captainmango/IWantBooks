@@ -13,7 +13,6 @@
 ActiveRecord::Schema.define(version: 2020_03_07_144941) do
 
   create_table "books", force: :cascade do |t|
-    t.integer "user_id"
     t.string "self_link"
     t.string "title"
     t.string "author"
@@ -34,9 +33,11 @@ ActiveRecord::Schema.define(version: 2020_03_07_144941) do
     t.integer "user_id"
     t.integer "book_id"
     t.string "name"
-    t.string "description"
+    t.string "desc"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_lists_on_book_id"
+    t.index ["user_id"], name: "index_lists_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
