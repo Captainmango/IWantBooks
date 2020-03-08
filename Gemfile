@@ -21,6 +21,8 @@ gem 'jquery-rails'
 gem 'httparty'
 gem 'dotenv-rails'
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+gem 'devise'
+gem 'omniauth-google-oauth2'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
