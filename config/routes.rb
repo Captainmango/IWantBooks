@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  #devise_for :users
   resources :comments
   resources :books
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   
 
   root to: "home#page"
