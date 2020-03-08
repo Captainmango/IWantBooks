@@ -1,10 +1,21 @@
-<h1 class="text-center">Welcome to I Want Books</h1>
 
-<% if current_user%>
-    <%=link_to "Sign out", destroy_user_session_path, method: :delete %>
-
+<%if current_user%>
+    this is a test
 <%else%>
-    <%= link_to "sign in", new_user_session_path%>
+    
 
-    <%= link_to "sign Up", new_user_registration_path%>
+<div class= "containter">
+    <div class = "jumbotron bg-primary text-white">
+        <h1 class="text-center">Welcome to I Want Books</h1>
+    </div class = "container">
+        <p>I Want Books is a social media site driven by what people are reading.
+        You can see comments on books and what people have in their libraries at the click of a button.
+        You can also read and buy books direct from Google with our awesome API integration. If you're a big reader,
+        then this is the site for you.
+        </p>
+    </div>
+</div>
+
 <%end%>
+
+
