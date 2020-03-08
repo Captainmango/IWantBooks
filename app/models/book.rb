@@ -1,6 +1,6 @@
 class Book < ApplicationRecord
-    has_many :lists
-    has_many :users, through: :lists
+    has_many :comments
+    has_many :users, through: :comments
 
     validates :title, presence: true
     validates :self_link, presence: true
