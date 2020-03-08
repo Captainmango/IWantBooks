@@ -22,7 +22,7 @@ class Book < ApplicationRecord
 # "previewLink": "http://books.google.co.uk/books?id=yHZhswEACAAJ&dq=test&hl=&cd=1&source=gbs_api",
 
     def self.search_books(query_string, author="", title="") 
-        url = "https://www.googleapis.com/books/v1/volumes?q=#{query_string.to_s}+inauthor:#{author.to_s}+intitle:#{title.to_s}&key=#{ENV["API_KEY"]}"
+        url = "https://www.googleapis.com/books/v1/volumes?q=#{query_string.to_s}+inauthor:#{author.to_s}+intitle:#{title.to_s}&maxResults=25&key=#{ENV["API_KEY"]}"
 
         response = HTTParty.get(url)
         results = response.parsed_response

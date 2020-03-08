@@ -3,8 +3,8 @@ class CreateLists < ActiveRecord::Migration[5.2]
     create_table :lists do |t|
       t.belongs_to :user
       t.belongs_to :book
-      t.string :name
-      t.string :desc
+      t.string :name, :null => false, :default => "My Library"
+      t.string :desc, :null => false, :default => "This is my library."
 
       t.timestamps
     end

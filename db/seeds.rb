@@ -5,3 +5,18 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+user_1 = User.create(:username => "edward", :password => "test", :first_name => "Edward", :last_name => "Heaver")
+user_2 = User.create(:username => "alice", :password => "test", :first_name => "Alice", :last_name => "Smithers")
+user_3 = User.create(:username => "reggie", :password => "test", :first_name => "Reggie", :last_name => "Yates")
+
+books = Book.search_books("Ruby")
+books["items"].each do |book|
+    Book.create(:self_link => book["selfLink"],
+        :title => book["volumeInfo"]["title"], 
+        :author => book["volumeInfo"]["authors"], 
+        :preview_link => book["volumeInfo"]["previewLink"],
+        :user => user_1, 
+        :thumbnail => book["volumeInfo"]["imageLinks"]["thumbnail"])
+end
+

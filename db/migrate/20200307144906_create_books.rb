@@ -4,8 +4,9 @@ class CreateBooks < ActiveRecord::Migration[5.2]
       
       t.string :self_link
       t.string :title
-      t.string :author
+      t.string :author, :default => "Author Unknown"
       t.string :preview_link
+      t.string :thumbnail
       
 
       t.timestamps
