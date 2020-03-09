@@ -14,17 +14,21 @@ Devise.setup do |config|
   # config.parent_controller = 'DeviseController'
 
 
-  # Add the credentials from your Google application to your secrets
-   client_id = Rails.application.secrets[:google_client_id]
-   client_secret = Rails.application.secrets[:google_secret]
-  # Configure Google omniauth with proper scope
-   config.omniauth :google_oauth2, ENV["CLIENT_ID"], ENV["CLIENT_SECRET"], 
-     scope: "https://www.googleapis.com/auth/books, email, profile", :info_fields => 'email',
-     :provider_ignores_state => true
+  # # Add the credentials from your Google application to your secrets
+    # client_id = Rails.application.secrets[:google_client_id]
+    # client_secret = Rails.application.secrets[:google_secret]
+  # # Configure Google omniauth with proper scope
+    config.omniauth :google_oauth2, ENV['CLIENT_ID'], ENV['CLIENT_SECRET'],{
+       scope: 'email,profile',
+       access_type: "online"
+      }
+
+
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
+  
   config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
 
   # Configure the class responsible to send e-mails.

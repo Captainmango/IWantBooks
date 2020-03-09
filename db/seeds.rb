@@ -6,12 +6,14 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user_1 = User.create(:username => "edward", :password => "test", :first_name => "Edward", :last_name => "Heaver")
-user_1.save
-user_2 = User.create(:username => "alice", :password => "test", :first_name => "Alice", :last_name => "Smithers")
+new1 = User.create(:email => "edward@example.com", :password => "edward21", :admin => true)
+new1.save
+user_2 = User.create(:email => "alice@example.com", :password => "alice221")
 user_2.save
-user_3 = User.create(:username => "reggie", :password => "test", :first_name => "Reggie", :last_name => "Yates")
+user_3 = User.create(:email => "reggie@example.com", :password => "reggie32")
 user_3.save
+
+user_1 = User.find(1)
 
 books = Book.search_books("Ruby")
 books["items"].each do |book|

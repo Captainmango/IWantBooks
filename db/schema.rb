@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2020_03_08_200506) do
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
     t.integer "book_id"
-    t.string "content", default: "Good relations with the Wookiees, I have.", null: false
+    t.string "content", default: "The dark side clouds everything. Impossible to see the future is.", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_comments_on_book_id"
