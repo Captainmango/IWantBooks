@@ -18,8 +18,10 @@ Devise.setup do |config|
     # client_id = Rails.application.secrets[:google_client_id]
     # client_secret = Rails.application.secrets[:google_secret]
   # # Configure Google omniauth with proper scope
-    config.omniauth :google_oauth2, ENV['CLIENT_ID'], ENV['CLIENT_SECRET'],{
+    config.omniauth :google_oauth2, ENV['CLIENT_ID'], ENV['CLIENT_SECRET'],
+    {
        scope: 'email,profile',
+       provider_ignores_state: true,
        access_type: "online"
       }
 
