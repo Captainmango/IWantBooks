@@ -6,7 +6,7 @@ class BooksController < ApplicationController
     def new
         @book = current_user.books.new
         @book.title = params["volumeInfo"]["title"]
-        @book.author = params["volumeInfo"]["authors"]
+        @book.author = params["volumeInfo"]["authors"].first
         @book.self_link = params["selfLink"]
         @book.preview_link = params["volumeInfo"]["previewLink"]
     end
