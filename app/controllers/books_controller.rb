@@ -21,17 +21,20 @@ class BooksController < ApplicationController
         @book = Book.find_by_id(params[:id])
     end
 
-    def patch
+    def update
         @book = Book.find_by_id(params[:id])
         @book.update(book_params)
         @book.save
+        flash[:success] = "Successfully updated book"
         redirect_to book_path(@book)
     end
 
-    def delete
+    def destroy
         @book = Book.find_by_id(params[:id])
         @book.comments.destroy_all
         @book.destroy
+        flash[:success] = "Successfully deleted book"
+        redirect_to "/"
     end
 
     def show
