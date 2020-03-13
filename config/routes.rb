@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   resources :comments
   resources :books
 
+  get "/search", to: "search#results"
+
   
   
 

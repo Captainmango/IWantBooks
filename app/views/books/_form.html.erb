@@ -1,0 +1,22 @@
+<%= form_for @book do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title%>
+  </div>
+
+  <div class="field">
+    <%= f.label :author %> <br />
+    <%= f.text_field :author%>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
