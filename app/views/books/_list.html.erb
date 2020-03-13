@@ -13,7 +13,7 @@
                 <th>Admin </th>
             </thead>
             <tbody>
-                <%current_user.books.each do |book|%>
+                <%user_books.each do |book|%>
                 <tr>
                     <td><%= link_to book.title, book_path(book)%></td>
                     <td><%=book.author%></td>
@@ -40,7 +40,7 @@
                 <th>Read Book </th>
             </thead>
             <tbody>
-                <%current_user.books.each do |book|%>
+                <%user_books.each do |book|%>
                 <tr>
                     <td><%=book.title%></td>
                     <td><%=book.author%></td>

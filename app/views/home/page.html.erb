@@ -1,6 +1,6 @@
 
 <%if current_user%>
-    <%=render partial: "books/list"%>
+    <%=render partial: "books/list", locals: {user_books: current_user.books}%>
 <%else%>
     
 
