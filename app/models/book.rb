@@ -35,4 +35,6 @@ class Book < ApplicationRecord
        result
     end
 
+    
+
 end

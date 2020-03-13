@@ -27,4 +27,13 @@ class User < ApplicationRecord
       user.save
     end
   end
+
+  def my_comments
+    Comment.where("user_id = #{current_user.id}")
+  end
+
+  def most_recent_book
+    current_user.books.last
+  end
+
 end
