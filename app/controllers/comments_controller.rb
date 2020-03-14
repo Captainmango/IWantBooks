@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 
     def index
         if params[:book_id]
-            @book = Book.find_by(id: params[:artist_id])
+            @book = Book.find_by(id: params[:book_id])
             if @book.nil?
                 flash[:alert] = "Book not found"
                 redirect_to books_path
@@ -30,6 +30,7 @@ class CommentsController < ApplicationController
             flash[:success] = "Comment created successfully"
             redirect_to book_path(@comment.book)
         else
+            flash[:alert] = @comment.errors
             render "new"
         end
 
@@ -41,6 +42,7 @@ class CommentsController < ApplicationController
         @comment.update(Comment_params)
     
         if @comment.save
+            flash[:success] = "Comment updated"
           redirect_to @comment
         else
             flash[:alert] = @comment.errors
@@ -74,7 +76,7 @@ class CommentsController < ApplicationController
 
     def show
         if params[:book_id]
-            @book = Book.find_by(id: params[:artist_id])
+            @book = Book.find_by(id: params[:book_id])
             @comment = @book.comments.find_by(id: params[:id])
             if @comment.nil?
                 flash[:alert] = "Comment not found"
