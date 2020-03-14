@@ -1,26 +1,35 @@
 class CommentsController < ApplicationController
 
     def index
-        if params[:book_id]
-            @book = Book.find_by(id: params[:book_id])
-            if @book.nil?
-                flash[:alert] = "Book not found"
-                redirect_to books_path
+        if current_user
+            if params[:book_id]
+                @book = Book.find_by(id: params[:book_id])
+                if @book.nil?
+                    flash[:alert] = "Book not found"
+                    redirect_to books_path
+                else
+                @comments = @book.comments
+                end
             else
-              @comments = @book.comments
+                @comments = Comment.all
             end
-          else
-            @comments = Comment.all
+        else
+            flash[:notice] = "Please sign up or sign"
+            redirect_to "/"
         end
-
     end
 
     def new
-        if params[:book_id] && !Book.exists?(params[:book_id])
-            flash[:alert] = "Book not found"
-            redirect_to books_path
+        if current_user
+            if params[:book_id] && !Book.exists?(params[:book_id])
+                flash[:alert] = "Book not found"
+                redirect_to books_path
+            else
+                @comment = Comment.new(book_id: params[:book_id], user_id: current_user.id)
+            end
         else
-            @comment = Comment.new(book_id: params[:book_id], user_id: current_user.id)
+            flash[:notice] = "Please sign up or sign"
+            redirect_to "/"
         end
     end
 
@@ -55,19 +64,24 @@ class CommentsController < ApplicationController
     end
 
     def edit
-        if params[:book_id]
-            book = Book.find_by(id: params[:book_id])
-            if book.nil?
-                flash[:alert] = "Book not found"
-                redirect_to books_path
+        if current_user
+            if params[:book_id]
+                book = Book.find_by(id: params[:book_id])
+                if book.nil?
+                    flash[:alert] = "Book not found"
+                    redirect_to books_path
+                else
+                @comment = book.comments.find_by(id: params[:id])
+                flash[:alert] = "Song not found" if @comment.nil?
+                redirect_to book_comments_path(book)
+                end
             else
-              @comment = book.comments.find_by(id: params[:id])
-              flash[:alert] = "Song not found" if @comment.nil?
-              redirect_to book_comments_path(book)
+                @comment = Comment.find_by_id(params[:id])
             end
-          else
-            @comment = Comment.find_by_id(params[:id])
-          end
+        else
+            flash[:notice] = "Please sign up or sign"
+            redirect_to "/"
+        end
     end
 
     def destroy
@@ -83,16 +97,21 @@ class CommentsController < ApplicationController
     end
 
     def show
-        if params[:book_id]
-            @book = Book.find_by(id: params[:book_id])
-            @comment = @book.comments.find_by(id: params[:id])
-            if @comment.nil?
-                flash[:alert] = "Comment not found"
-                redirect_to book_comments_path(@book)
+        if current_user
+            if params[:book_id]
+                @book = Book.find_by(id: params[:book_id])
+                @comment = @book.comments.find_by(id: params[:id])
+                if @comment.nil?
+                    flash[:alert] = "Comment not found"
+                    redirect_to book_comments_path(@book)
+                end
+            else
+                @comment = Comment.find_by_id(params[:id])
             end
-          else
-            @comment = Comment.find_by_id(params[:id])
-          end
+        else
+            flash[:notice] = "Please sign up or sign"
+            redirect_to "/"
+        end
     end
     
     private
