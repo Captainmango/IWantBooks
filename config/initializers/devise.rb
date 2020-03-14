@@ -22,7 +22,8 @@ Devise.setup do |config|
     {
        scope: 'email,profile',
        provider_ignores_state: true,
-       access_type: "online"
+       access_type: "online",
+       skip_jwt: true
       }
 
 
