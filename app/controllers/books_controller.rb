@@ -38,6 +38,7 @@ class BooksController < ApplicationController
     def edit
         if current_user
             @book = Book.find_by_id(params[:id])
+            redir_if_not_found(@book)
         else
             flash[:notice] = "Please sign up or sign"
             redirect_to "/"
@@ -63,6 +64,7 @@ class BooksController < ApplicationController
     def show
         if current_user
             @book = Book.find_by_id(params[:id])
+            redir_if_not_found(@book)
         else
             flash[:notice] = "Please sign up or sign"
             redirect_to "/"
