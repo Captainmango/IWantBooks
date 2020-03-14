@@ -35,11 +35,8 @@ class Book < ApplicationRecord
        result
     end
 
-    def most_recent_book
-        Book.last
+    def self.most_recent_book
+        all.last
     end
-
-
-    
 
 end

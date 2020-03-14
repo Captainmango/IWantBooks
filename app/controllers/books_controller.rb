@@ -76,6 +76,12 @@ class BooksController < ApplicationController
         end
     end
 
+    def most_recent_book
+        @book = Book.most_recent_book
+        render :show
+    end
+
+
     private
 
     def book_params
