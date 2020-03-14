@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
             flash[:alert] = "Book not found"
             redirect_to books_path
         else
-            @comment = comment.new(book_id: params[:book_id], user_id: current_user.id)
+            @comment = Comment.new(book_id: params[:book_id], user_id: current_user.id)
         end
     end
 
@@ -38,15 +38,18 @@ class CommentsController < ApplicationController
 
     def update
         @comment = Comment.find_by_id(params[:id])
-
-        @comment.update(comments_params)
-    
-        if @comment.save
-            flash[:success] = "Comment updated"
-          redirect_to @comment
+        if @comment.user_id == current_user.id || current_user.admin
+            @comment.update(comments_params)
+            if @comment.save
+                flash[:success] = "Comment updated"
+                redirect_to @comment
+            else
+                flash[:alert] = @comment.errors
+                render :edit
+            end
         else
-            flash[:alert] = @comment.errors
-            render :edit
+            flash[:alert] = "Cannot edit other users comments"
+            redirect_to "/"
         end
 
     end
@@ -69,9 +72,14 @@ class CommentsController < ApplicationController
 
     def destroy
         @comment = Comment.find_by_id(params[:id])
-        @comment.destroy
-        flash[:success] = "Successfully deleted comment"
-        redirect_to "/"
+        if @comment.user_id == current_user.id || current_user.admin
+            @comment.destroy
+            flash[:success] = "Successfully deleted comment"
+            redirect_to "/"
+        else
+            flash[:alert] = "Cannot delete other people's comments"
+            redirect_to book_path(@comment.book)
+        end
     end
 
     def show

@@ -37,7 +37,7 @@ class User < ApplicationRecord
   end
 
   def library
-    self.books
+    self.books.uniq
   end
 
 

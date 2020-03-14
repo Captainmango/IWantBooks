@@ -4,5 +4,6 @@
 <h2><%=@book.author%></h2>
 <%=link_to "Read Book", @book.preview_link, target: :_blank%>
 <br>
+<%= link_to "add comment", new_book_comment_path(@book)%>
 <br>
-<%=render partial: "comments/list", locals: {user_comments: current_user.most_recent_comments(5)} %>
+<%=render partial: "comments/list", locals: {user_comments: @book.comments} %>

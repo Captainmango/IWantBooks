@@ -16,7 +16,7 @@
                 <%@books.each do |book|%>
                 <tr>
                     <td><%=book["volumeInfo"]["title"]%></td>
-                    <td><%=book["volumeInfo"]["authors"]%></td>
+                    <td><%=book["volumeInfo"]["authors"].first%></td>
                     <td><%=link_to book["volumeInfo"]["title"], new_book_path(book)%></td>
                     <td><%=link_to "Go to Google Books", book["volumeInfo"]["previewLink"], target: :_blank %></td>
                 </tr>
