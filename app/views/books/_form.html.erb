@@ -1,3 +1,4 @@
+<% if current_user.admin %>
 <%= form_for @book do |f| %>
 
 <% if @book.errors.any? %>
@@ -13,7 +14,7 @@
 
   <div class="field">
     <%= f.label :title %><br />
-    <%= f.text_field :title, :readonly=> true%>
+    <%= f.text_field :title%>
   </div>
 
   <div class="field">
@@ -23,15 +24,64 @@
 
   <div class="field">
     <%= f.label :self_link %><br />
-    <%= f.text_field :self_link %>
+    <%= f.text_field :self_link, :readonly => true%>
   </div>
   
   <div class="field">
     <%= f.label :preview_link %><br />
-    <%= f.text_field :preview_link %>
+    <%= f.text_field :preview_link, :readonly => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tag %><br />
+    <%= f.text_field :tag, :readonly => true %>
   </div>
 
   <div class="actions">
     <%= f.submit%>
   </div>
 <% end %>
+<%else%>
+<%= form_for @book do |f| %>
+
+<% if @book.errors.any? %>
+    <div id="error_explanation">
+      <h2>There were some errors:</h2>
+      <ul>
+        <% @book.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title, :readonly => true%>
+  </div>
+
+  <div class="field">
+    <%= f.label :author %> <br />
+    <%= f.text_field :author, :readonly => true%>
+  </div>
+
+  <div class="field">
+    <%= f.label :self_link %><br />
+    <%= f.text_field :self_link, :readonly => true%>
+  </div>
+  
+  <div class="field">
+    <%= f.label :preview_link %><br />
+    <%= f.text_field :preview_link, :readonly => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tag %><br />
+    <%= f.text_field :tag, :readonly => true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit%>
+  </div>
+<% end %>
+<%end%>

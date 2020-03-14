@@ -17,7 +17,8 @@ user_1 = User.find(1)
 
 books = Book.search_books("Ruby")
 books["items"].each do |book|
-    new_book = user_1.books.create(:self_link => book["selfLink"],
+    new_book = user_1.books.create(:tag => book["id"],
+        :self_link => book["selfLink"],
         :title => book["volumeInfo"]["title"], 
         :author => book["volumeInfo"]["authors"], 
         :preview_link => book["volumeInfo"]["previewLink"])

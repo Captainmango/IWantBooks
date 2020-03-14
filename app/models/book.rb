@@ -1,8 +1,10 @@
 class Book < ApplicationRecord
+
     has_many :comments
     has_many :users, through: :comments
 
-    validates :title, {presence: true, uniqueness: true}
+    validates :tag, {presence: true, uniqueness: true}
+    validates :title, presence: true
     validates :self_link, presence: true
     validates :author, presence: true
     validates :preview_link, presence: true
