@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2020_03_08_200506) do
 
   create_table "books", force: :cascade do |t|
+    t.string "tag"
     t.string "self_link"
     t.string "title"
     t.string "author", default: "Author Unknown"
