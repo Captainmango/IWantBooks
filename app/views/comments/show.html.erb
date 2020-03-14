@@ -9,8 +9,15 @@
             <br>
             <br>
             <%=@comment.created_at%>
+            <br>
             <%= link_to "Home", "/"%>
+            <%if current_user.id == @comment.user_id || current_user.admin%>
+            <br>
+                <%= link_to "Edit comment", edit_comment_path(@comment)%>
+            <%end%>
+            <br>
             <%= link_to "What's happening in the conversation?", book_path(@comment.book)%>
+            <br>
             </div>
         </div>
     </div>

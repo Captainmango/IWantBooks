@@ -2,7 +2,12 @@ class BooksController < ApplicationController
 
     def index
         if current_user
-            @books = Book.all
+            if current_user.admin
+                @books = Book.all
+            else
+                flash[:notice] = "Only admins can be here"
+                redirect_to "/"
+            end
         else
             flash[:notice] = "Please sign up or sign"
             redirect_to "/"

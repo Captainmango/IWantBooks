@@ -39,9 +39,9 @@
                 <% user_comments.each do |comment| %>
                 <tr>
                     <td><%=comment.user.email%></td>
-                    <td><%=comment.content%></td>
+                    <td><%=link_to comment.content, comment_path(comment)%></td>
                     <td><%=comment.created_at %></td>
-                    <%if current_user.id = comment.user_id%>
+                    <%if current_user.id == comment.user_id%>
                     <td><%=link_to "Delete", comment_path(comment), method: :delete, data: { confirm: 'Are you certain you want to delete this?' }%> / 
                     <%= link_to "Edit", edit_comment_path(comment) %></td>
                     <%end%>
