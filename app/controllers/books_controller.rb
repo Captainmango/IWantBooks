@@ -1,15 +1,25 @@
 class BooksController < ApplicationController
 
     def index
-        @books = Book.all
+        if current_user
+            @books = Book.all
+        else
+            flash[:notice] = "Please sign up or sign"
+            redirect_to "/"
+        end
     end
 
     def new
-        @book = current_user.books.new
-        @book.title = params["volumeInfo"]["title"]
-        @book.author = params["volumeInfo"]["authors"].first
-        @book.self_link = params["selfLink"]
-        @book.preview_link = params["volumeInfo"]["previewLink"]
+        if current_user
+            @book = current_user.books.new
+            @book.title = params["volumeInfo"]["title"]
+            @book.author = params["volumeInfo"]["authors"].first
+            @book.self_link = params["selfLink"]
+            @book.preview_link = params["volumeInfo"]["previewLink"]
+        else
+            flash[:notice] = "Please sign up or sign"
+            redirect_to "/"
+        end
     end
 
     def create
@@ -26,7 +36,12 @@ class BooksController < ApplicationController
     end
 
     def edit
-        @book = Book.find_by_id(params[:id])
+        if current_user
+            @book = Book.find_by_id(params[:id])
+        else
+            flash[:notice] = "Please sign up or sign"
+            redirect_to "/"
+        end
     end
 
     def update
@@ -46,7 +61,12 @@ class BooksController < ApplicationController
     end
 
     def show
-        @book = Book.find_by_id(params[:id])
+        if current_user
+            @book = Book.find_by_id(params[:id])
+        else
+            flash[:notice] = "Please sign up or sign"
+            redirect_to "/"
+        end
     end
 
     private
