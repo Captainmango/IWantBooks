@@ -2,7 +2,7 @@ class Book < ApplicationRecord
     has_many :comments
     has_many :users, through: :comments
 
-    validates :title, presence: true
+    validates :title, {presence: true, uniqueness: true}
     validates :self_link, presence: true
     validates :author, presence: true
     validates :preview_link, presence: true
@@ -22,7 +22,7 @@ class Book < ApplicationRecord
 # "previewLink": "http://books.google.co.uk/books?id=yHZhswEACAAJ&dq=test&hl=&cd=1&source=gbs_api",
 
     def self.search_books(query_string, author="", title="") 
-        url = "https://www.googleapis.com/books/v1/volumes?q=#{query_string.to_s}+inauthor:#{author.to_s}+intitle:#{title.to_s}&maxResults=15&key=#{ENV["API_KEY"]}"
+        url = "https://www.googleapis.com/books/v1/volumes?q=#{query_string.to_s}&maxResults=15&key=#{ENV["API_KEY"]}"
 
         response = HTTParty.get(url)
         results = response.parsed_response
@@ -34,6 +34,11 @@ class Book < ApplicationRecord
        result = response.parsed_response
        result
     end
+
+    def most_recent_book
+        Book.last
+    end
+
 
     
 

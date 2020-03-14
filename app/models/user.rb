@@ -32,8 +32,13 @@ class User < ApplicationRecord
     Comment.where("user_id = #{current_user.id}")
   end
 
-  def most_recent_book
-    current_user.books.last
+  def most_recent_comments(num)
+    Comment.where("user_id = #{current_user.id}").order("created_at DESC").limit(num)
   end
+
+  def library
+    self.books
+  end
+
 
 end

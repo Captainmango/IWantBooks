@@ -13,8 +13,14 @@ class BooksController < ApplicationController
 
     def create
         @book = current_user.books.create(book_params)
-        @book.save
-        redirect_to book_path(@book)
+        if @book.save
+            flash[:success] = "Book added to library successfully."
+            redirect_to book_path(@book)
+        else
+            @book = Book.find_by(title: params[:book][:title])
+            flash[:warning] = "A user already has this book in their library."
+            redirect_to book_path(@book)
+        end
     end
 
     def edit
