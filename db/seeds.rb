@@ -22,5 +22,16 @@ books["items"].each do |book|
         :author => book["volumeInfo"]["authors"], 
         :preview_link => book["volumeInfo"]["previewLink"])
         new_book.save
+
 end
+
+# user_1.books.each do |book|
+#     19.times do
+#         comment = book.comments.create(content: Faker::Quote.yoda, user_id: user_1.id, book_id: book.id)
+#         comment.save
+#         byebug
+
+#     end
+# end
+
 

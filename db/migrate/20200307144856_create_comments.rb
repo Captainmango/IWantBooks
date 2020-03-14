@@ -3,9 +3,10 @@ class CreateComments < ActiveRecord::Migration[5.2]
     create_table :comments do |t|
       t.belongs_to :user
       t.belongs_to :book
-      t.string :content, :null => false, :default => Faker::Quote.yoda
+      t.string :content, :null => false, :default => "Added to library"
 
       t.timestamps
     end
   end
 end
+
