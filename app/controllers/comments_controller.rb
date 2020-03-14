@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
     end
 
     def create
-        @comment = Comment.create(comment_params)
+        @comment = Comment.create(comments_params)
         if @comment.save
             flash[:success] = "Comment created successfully"
             redirect_to book_path(@comment.book)
@@ -39,7 +39,7 @@ class CommentsController < ApplicationController
     def update
         @comment = Comment.find_by_id(params[:id])
 
-        @comment.update(Comment_params)
+        @comment.update(comments_params)
     
         if @comment.save
             flash[:success] = "Comment updated"

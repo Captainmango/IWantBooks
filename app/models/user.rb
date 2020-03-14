@@ -29,11 +29,11 @@ class User < ApplicationRecord
   end
 
   def my_comments
-    Comment.where("user_id = #{current_user.id}")
+    Comment.where("user_id = #{self.id}")
   end
 
   def most_recent_comments(num)
-    Comment.where("user_id = #{current_user.id}").order("created_at DESC").limit(num)
+    Comment.where("user_id = #{self.id}").order("created_at DESC").limit(num)
   end
 
   def library
