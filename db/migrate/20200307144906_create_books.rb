@@ -1,7 +1,7 @@
 class CreateBooks < ActiveRecord::Migration[5.2]
   def change
     create_table :books do |t|
-      t.string :tag
+      
       t.string :self_link
       t.string :title
       t.string :author, :default => "Author Unknown"
