@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
 
     def index
+        @books = Book.all
     end
 
     def new
@@ -19,6 +20,7 @@ class BooksController < ApplicationController
         else
             @book = Book.find_by(title: params[:book][:title])
             flash[:warning] = "A user already has this book in their library."
+            @book.users.ids << current_user.id
             redirect_to book_path(@book)
         end
     end
