@@ -21,7 +21,7 @@ class BooksController < ApplicationController
             @book.author = params["volumeInfo"]["authors"].first
             @book.self_link = params["selfLink"]
             @book.preview_link = params["volumeInfo"]["previewLink"]
-            @book.tag = params["tag"]
+            @book.tag = params["id"]
         else
             flash[:notice] = "Please sign up or sign"
             redirect_to "/"
