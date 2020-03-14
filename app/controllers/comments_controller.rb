@@ -69,10 +69,10 @@ class CommentsController < ApplicationController
                 book = Book.find_by(id: params[:book_id])
                 if book.nil?
                     flash[:alert] = "Book not found"
-                    redirect_to books_path
+                    redirect_to books_paths
                 else
                 @comment = book.comments.find_by(id: params[:id])
-                flash[:alert] = "Song not found" if @comment.nil?
+                flash[:alert] = "Comment not found" if @comment.nil?
                 redirect_to book_comments_path(book)
                 end
             else
