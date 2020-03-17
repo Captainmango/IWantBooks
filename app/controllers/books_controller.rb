@@ -21,7 +21,6 @@ class BooksController < ApplicationController
             @book.author = params["volumeInfo"]["authors"].first
             @book.self_link = params["selfLink"]
             @book.preview_link = params["volumeInfo"]["previewLink"]
-            @book.tag = params["id"]
         else
             flash[:notice] = "Please sign up or sign"
             redirect_to "/"
@@ -34,7 +33,7 @@ class BooksController < ApplicationController
             flash[:success] = "Book added to library successfully."
             redirect_to book_path(@book)
         else
-            @book = Book.find_by(title: params[:book][:title])
+            @book = Book.find_by(self_link: params[:book][:self_link])
             flash[:warning] = "A user already has this book in their library."
             @book.users.ids << current_user.id
             redirect_to book_path(@book)
