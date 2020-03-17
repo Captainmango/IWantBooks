@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-
+    before_action :set_book, only: [:update, :destroy, :show, :edit]
     def index
         if current_user
             if current_user.admin
@@ -42,7 +42,6 @@ class BooksController < ApplicationController
 
     def edit
         if current_user
-            @book = Book.find_by_id(params[:id])
             redir_if_not_found(@book)
         else
             flash[:notice] = "Please sign up or sign"
@@ -51,7 +50,6 @@ class BooksController < ApplicationController
     end
 
     def update
-        @book = Book.find_by_id(params[:id])
         @book.update(book_params)
         @book.save
         flash[:success] = "Successfully updated book"
@@ -59,7 +57,6 @@ class BooksController < ApplicationController
     end
 
     def destroy
-        @book = Book.find_by_id(params[:id])
         @book.comments.destroy_all
         @book.destroy
         flash[:success] = "Successfully deleted book"
@@ -68,7 +65,6 @@ class BooksController < ApplicationController
 
     def show
         if current_user
-            @book = Book.find_by_id(params[:id])
             redir_if_not_found(@book)
         else
             flash[:notice] = "Please sign up or sign"
@@ -87,5 +83,10 @@ class BooksController < ApplicationController
     def book_params
         params.require(:book).permit(:id, :title, :author, :self_link, :preview_link)
     end
+
+    def set_book
+        @book = Book.find_by_id(params[:id])
+    end
+
 
 end

@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-
+    before_action :set_comment, only: [:update, :destroy, :show, :edit]
     def index
         if current_user
             if params[:book_id]
@@ -46,7 +46,6 @@ class CommentsController < ApplicationController
     end
 
     def update
-        @comment = Comment.find_by_id(params[:id])
         if @comment.user_id == current_user.id || current_user.admin
             @comment.update(comments_params)
             if @comment.save
@@ -71,12 +70,10 @@ class CommentsController < ApplicationController
                     flash[:alert] = "Book not found"
                     redirect_to books_paths
                 else
-                @comment = book.comments.find_by(id: params[:id])
                 flash[:alert] = "Comment not found" if @comment.nil?
                 redirect_to book_comments_path(book)
                 end
             else
-                @comment = Comment.find_by_id(params[:id])
                 redir_if_not_found(@comment)
             end
         else
@@ -86,7 +83,6 @@ class CommentsController < ApplicationController
     end
 
     def destroy
-        @comment = Comment.find_by_id(params[:id])
         if @comment.user_id == current_user.id || current_user.admin
             @comment.destroy
             flash[:success] = "Successfully deleted comment"
@@ -101,13 +97,11 @@ class CommentsController < ApplicationController
         if current_user
             if params[:book_id]
                 @book = Book.find_by(id: params[:book_id])
-                @comment = @book.comments.find_by(id: params[:id])
                 if @comment.nil?
                     flash[:alert] = "Comment not found"
                     redirect_to book_comments_path(@book)
                 end
             else
-                @comment = Comment.find_by_id(params[:id])
                 redir_if_not_found(@comment)
             end
         else
@@ -121,4 +115,9 @@ class CommentsController < ApplicationController
     def comments_params
         params.require(:comment).permit(:content, :user_id, :book_id)
     end
+
+    def set_comment
+        @comment = Comment.find_by_id(params[:id])
+    end
+
 end
