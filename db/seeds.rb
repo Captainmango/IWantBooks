@@ -20,7 +20,7 @@ books["items"].each do |book|
     new_book = user_1.books.create(
         :self_link => book["selfLink"],
         :title => book["volumeInfo"]["title"], 
-        :author => book["volumeInfo"]["authors"], 
+        :author => book["volumeInfo"]["authors"].to_a[0], 
         :preview_link => book["volumeInfo"]["previewLink"])
         new_book.save
 
